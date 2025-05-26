@@ -16,6 +16,7 @@ import { AuthService } from './auth.service';
 import { LoginUserDto } from './dto/login-user.dto';
 import { Serialize } from '../common/interceptors/serialize.interceptor';
 import { GetUserDto } from './dto/get-user.dto';
+import { Public } from '../decorators/public.decorator';
 
 @Controller('users')
 export class UserController {
@@ -24,12 +25,14 @@ export class UserController {
     private readonly authService: AuthService,
   ) {}
 
+  @Public()
   @Post('register')
   register(@Body() registerUserDto: RegisterUserDto) {
     console.log(registerUserDto);
     return this.authService.register(registerUserDto);
   }
 
+  @Public()
   @Post('login')
   login(@Body() loginUserDto: LoginUserDto) {
     return this.authService.login(loginUserDto);
